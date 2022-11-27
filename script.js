@@ -1,14 +1,18 @@
 const modal = document.querySelector('#modal');
 const closeModalBtn = document.querySelector('#modal-close-btn');
 const modalForm = document.querySelector('#modal-form');
-
 const modalText = document.querySelector('#modal-text');
+const declineBtn = document.querySelector('#decline-btn');
 
 closeModalBtn.addEventListener('click', () => (modal.style.display = 'none'));
 
 setTimeout(() => {
   modal.style.display = 'inline';
 }, 1500);
+
+declineBtn.addEventListener('mouseenter', () => {
+  document.querySelector('#modal-choice-btns').classList.toggle('reverse');
+});
 
 // applying the modal joke
 modalForm.addEventListener('submit', (e) => {
@@ -30,6 +34,7 @@ modalForm.addEventListener('submit', (e) => {
   }, 1500);
 
   setTimeout(() => {
+    closeModalBtn.disabled = false;
     document.querySelector('#modal-inner').innerHTML = `
     <h2>Thanks <span class="modal-display-name">${fullName}</span>, you sucker! </h2>
     <p>We just sold the rights to your eternal soul.</p>
@@ -38,8 +43,4 @@ modalForm.addEventListener('submit', (e) => {
     </div>
     `;
   }, 3000);
-
-  setTimeout(() => {
-    modal.style.display = 'none';
-  }, 10000);
 });
